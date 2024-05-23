@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import Addform from "./components/Addform";
-import Monthlist from "./components/Monthlist.jsx";
 import { GlobalStyle } from "./StyledComponents/GlobalStyle.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ExpendiDetail from "./components/ExpendiDetail";
 
 function App() {
   //각항목을 담은 state
@@ -10,10 +11,16 @@ function App() {
 
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Addform setExpenses={setExpenses} expenses={expenses} />}
+          />
+          <Route path="/detail/:id" element={<ExpendiDetail expenses={expenses} setExpenses={setExpenses}/>} />
+        </Routes>
+      </BrowserRouter>
       <GlobalStyle />
-      <div id="main">
-        <Addform setExpenses={setExpenses} expenses={expenses} />
-      </div>
     </>
   );
 }

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import AddInputs from "./AddInputs.jsx";
 import Monthlist from "./Monthlist.jsx";
 
-const Addform = ({ setExpenses,expenses }) => {
+const Addform = ({ setExpenses, expenses }) => {
   const [inputs, setInpus] = useState({
     id: "",
     date: "",
@@ -71,21 +71,23 @@ const Addform = ({ setExpenses,expenses }) => {
 
   return (
     <>
-      <S.Fromsubmit onSubmit={handleAddForm}>
-        {[...Object.entries(inputs)]
-          .filter(([key]) => key !== "id")
-          .map(([item, value], index) => (
-            // console.log(item,value)
-            <AddInputs
-              key={index}
-              item={item}
-              value={value}
-              setInpus={setInpus}
-            />
-          ))}
-        <S.FormSaveBtn>저장</S.FormSaveBtn>
-      </S.Fromsubmit>
-      <Monthlist expenses={expenses} />
+      <div id="main">
+        <S.Fromsubmit onSubmit={handleAddForm}>
+          {[...Object.entries(inputs)]
+            .filter(([key]) => key !== "id")
+            .map(([item, value], index) => (
+              // console.log(item,value)
+              <AddInputs
+                key={index}
+                item={item}
+                value={value}
+                setInpus={setInpus}
+              />
+            ))}
+          <S.FormSaveBtn>저장</S.FormSaveBtn>
+        </S.Fromsubmit>
+        <Monthlist expenses={expenses} />
+      </div>
     </>
   );
 };

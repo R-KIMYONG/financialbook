@@ -7,8 +7,9 @@ const TotalGraph = ({ categoryItem, getCategoryTotal, totalAmount }) => {
   return (
     <>
       <S.TotalGraphUl>
-        {categoryItem.map((item) => (
+        {categoryItem.map((item, index) => (
           <S.TotalGraphLi
+            key={index}
             $activeColor={item}
             $activeWidth={(
               (getCategoryTotal(item) / totalAmount) *

@@ -29,7 +29,7 @@ const Monthlist = ({ expenses }) => {
         ))}
       </S.MonthUl>
       <Totalex expenses={expenses} activeIndex={activeIndex} />
-      <ExpenditureItem expenses={expenses} />
+      <ExpenditureItem expenses={expenses} activeIndex={activeIndex} />
     </div>
   );
 };
