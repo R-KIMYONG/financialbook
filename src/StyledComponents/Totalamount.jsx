@@ -51,6 +51,9 @@ export const TotalLi = styled.li`
     display: flex;
     flex-direction: column;
   }
+  & > div > p {
+    margin-top: 2px;
+  }
   & span {
     margin-left: 10px;
   }
@@ -69,20 +72,7 @@ export const TotalGraphUl = styled.ul`
 
 export const TotalGraphLi = styled.li`
   width: ${(props) => {
-    switch (props.$activeColor) {
-      case "여행":
-        return props.$activeWidth + "%";
-      case "식비":
-        return props.$activeWidth + "%";
-      case "미용":
-        return props.$activeWidth + "%";
-      case "도서":
-        return props.$activeWidth + "%";
-      case "기타":
-        return props.$activeWidth + "%";
-      default:
-        return props.$activeWidth + "%";
-    }
+    return props.$activeWidth + "%";
   }};
   transition: 0.5s;
   background: ${(props) => {

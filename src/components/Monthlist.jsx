@@ -1,30 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "../StyledComponents/Monthstyle.jsx";
-import { nanoid } from "nanoid";
 import Totalex from "./Totalex.jsx";
 import ExpenditureItem from "./ExpenditureItem.jsx";
-const Monthlist = ({ expenses }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  let month = [];
-  for (let i = 1; i <= 12; i++) {
-    month[i - 1] = { num: i, id: nanoid() };
-  }
+const Monthlist = ({ expenses, setInputs, activeIndex, setActiveIndex }) => {
+  const months = Array.from({ length: 12 }, (_, index) => index + 1);
+
   const handleClick = (index) => {
+    const clickedMonth = `2024-${String(index + 1).padStart(2, "0")}-01`;
+    setInputs((prev) => ({
+      ...prev,
+      date: clickedMonth,
+    }));
+
     setActiveIndex(index);
   };
+
+  useEffect(() => {
+    localStorage.setItem("monthIndex", JSON.stringify(activeIndex));
+  }, [activeIndex]);
   return (
     <div>
       <S.MonthUl>
-        {month.map((item, index) => (
+        {months.map((item, index) => (
           <S.MonthLi
-            key={item.id}
+            key={index}
             id={item.id}
             $active={activeIndex === index}
             onClick={() => {
               handleClick(index);
             }}
           >
-            {item.num}월
+            {item}월
           </S.MonthLi>
         ))}
       </S.MonthUl>

@@ -1,9 +1,6 @@
 import React from "react";
 import * as S from "../StyledComponents/Totalamount.jsx";
 const TotalGraph = ({ categoryItem, getCategoryTotal, totalAmount }) => {
-  //   const categoryTotal = getCategoryTotal(category);
-  //   console.log(((getCategoryTotal("여행") / totalAmount) * 100).toFixed(2));
-
   return (
     <>
       <S.TotalGraphUl>

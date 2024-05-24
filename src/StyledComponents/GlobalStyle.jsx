@@ -10,4 +10,5 @@ export const GlobalStyle = createGlobalStyle`
   background:cornsilk;
   }
   #main{width:1200px;margin:0px auto;}
+  
 `;

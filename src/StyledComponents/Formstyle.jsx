@@ -26,6 +26,10 @@ export const FormSaveBtn = styled.button`
   cursor: pointer;
   font-weight: bold;
   letter-spacing: 2px;
+  transition: 0.3s;
+  &:hover {
+    box-shadow: 0px 0px 10px #ccc;
+  }
 `;
 
 export const Formlabel = styled.label`
@@ -33,8 +37,10 @@ export const Formlabel = styled.label`
 `;
 
 export const Forminput = styled.input`
-  height: 30px;
+  height: 40px;
   padding-left: 10px;
   box-sizing: border-box;
-  &:focus{outline:none}
+  &:focus {
+    outline: none;
+  }
 `;

@@ -4,8 +4,7 @@ export const DetailDiv = styled.div`
   position: absolute;
   background: #fff;
   color: #000;
-  padding: 20px 30px;
-
+  padding: 40px;
   border-radius: 10px;
   box-sizing: border-box;
   left: 50%;
@@ -14,20 +13,24 @@ export const DetailDiv = styled.div`
   display: grid;
   grid-template-rows: max-content;
   gap: 20px;
+  & > h2{text-align:center;font-size:40px;}
   & > .detail-input {
     display: flex;
     flex-direction: column;
   }
   & > .detail-input > label {
-    margin-bottom: 10px;
+    font-size:20px;
+    margin: 15px 10px;
   }
   & > .detail-input > input {
     width: 800px;
-    height: 50px;
+    height: 55px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding-left: 10px;
+    padding: 10px 25px;
     box-sizing: border-box;
+    font-weight: bold;
+    font-size:18px;
   }
   & > .UDB-btnbox {
     display: flex;

@@ -4,10 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import AddInputs from "./AddInputs.jsx";
 import Monthlist from "./Monthlist.jsx";
 
-const Addform = ({ setExpenses, expenses }) => {
-  const [inputs, setInpus] = useState({
+const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
+  const getDate = new Date();
+  const getYear = getDate.getFullYear();
+  const [inputs, setInputs] = useState({
     id: "",
-    date: "",
+    date: `${getYear}-${String(Number(activeIndex) + 1).padStart(2, "0")}-01`,
     category: "",
     amount: "",
     content: "",
@@ -21,7 +23,6 @@ const Addform = ({ setExpenses, expenses }) => {
       resetAddform();
       return;
     }
-    // console.log(date.slice(5, 7));
     const newExpenses = {
       id: uuidv4(),
       date: inputs.date,
@@ -36,7 +37,7 @@ const Addform = ({ setExpenses, expenses }) => {
 
   const checkInput = () => {
     const newError = {};
-    if (inputs.date === "") newError["date"] = "날짜를 입력하세요.";
+    if (inputs.date.slice(-1) === "") newError["date"] = "날짜를 입력하세요.";
 
     if (!inputs.category.trim()) {
       newError["category"] = "항목을 입력하세요.";
@@ -60,11 +61,13 @@ const Addform = ({ setExpenses, expenses }) => {
   };
 
   const resetAddform = () => {
-    setInpus({
-      date: "",
-      category: "",
-      amount: "",
-      content: "",
+    setInputs((prev) => {
+      return {
+        date: `2024-${String(activeIndex + 1).padStart(2, "0")}-01`,
+        category: "",
+        amount: "",
+        content: "",
+      };
     });
     setError({});
   };
@@ -76,17 +79,23 @@ const Addform = ({ setExpenses, expenses }) => {
           {[...Object.entries(inputs)]
             .filter(([key]) => key !== "id")
             .map(([item, value], index) => (
-              // console.log(item,value)
               <AddInputs
                 key={index}
                 item={item}
                 value={value}
-                setInpus={setInpus}
+                setInputs={setInputs}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
               />
             ))}
           <S.FormSaveBtn>저장</S.FormSaveBtn>
         </S.Fromsubmit>
-        <Monthlist expenses={expenses} />
+        <Monthlist
+          expenses={expenses}
+          setInputs={setInputs}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+        />
       </div>
     </>
   );

@@ -1,12 +1,27 @@
 import React from "react";
 import * as S from "../StyledComponents/Formstyle.jsx";
-const AddInputs = ({ item, value, setInpus }) => {
+const AddInputs = ({ item, value, setInputs }) => {
   const handleChange = (e) => {
-    setInpus((prevInputs) => ({
-      ...prevInputs,
-      [item]: e.target.value,
-    }));
+    const { name, value } = e.target;
+
+    setInputs((prevInputs) => {
+      if (name === "date") {
+        const [year, month] = prevInputs.date.split("-");
+        let day = value.split("-")[2];
+        const validDay = day > 0 && day <= 31 ? day : "";
+        const newDate = `${year}-${month}-${validDay}`;
+        return {
+          ...prevInputs,
+          date: newDate,
+        };
+      }
+      return {
+        ...prevInputs,
+        [name]: value,
+      };
+    });
   };
+
   return (
     <S.Formdiv>
       <S.Formlabel htmlFor="date">
@@ -19,14 +34,18 @@ const AddInputs = ({ item, value, setInpus }) => {
           : "내용"}
       </S.Formlabel>
       <S.Forminput
-        type={item === "date" ? "date" : "text"}
+        type={item === "amount" ? "number" : "text"}
         value={value}
+        name={item}
+        autoComplete="off"
         placeholder={
           item === "category"
             ? "지출 항목"
             : item === "amount"
             ? "지출 금액"
-            : "지출 내용"
+            : item === "date"
+            ? "YYYY-MM-DD"
+            : ""
         }
         onChange={handleChange}
       />

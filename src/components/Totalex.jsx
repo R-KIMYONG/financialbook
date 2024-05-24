@@ -28,7 +28,6 @@ const Totalex = ({ expenses, activeIndex }) => {
           otherAmount += Number(item.amount);
         }
       });
-
     return category === "기타" ? otherAmount : total;
   };
 
