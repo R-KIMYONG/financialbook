@@ -19,7 +19,7 @@ export const MonthLi = styled.li`
   padding: 15px;
   box-sizing: border-box;
   background: ${(props) => (props.$active ? "cornsilk" : "lightgray")};
-  color: ${(props) => (props.$active ? "lightgray" : "#fff")};
+  color: ${(props) => (props.$active ? "lightblue" : "#fff")};
   font-size: 25px;
   border-radius: 10px;
   transition: 0.3s;
