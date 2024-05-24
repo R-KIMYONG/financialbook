@@ -21,7 +21,7 @@ export const MonthLi = styled.li`
   background: ${(props) => (props.$active ? "cornsilk" : "lightgray")};
   color: ${(props) => (props.$active ? "lightblue" : "#fff")};
   font-size: 25px;
-  border-radius: 10px;
+  border-radius: 10px  ;
   transition: 0.3s;
   cursor: pointer;
   &:hover {
