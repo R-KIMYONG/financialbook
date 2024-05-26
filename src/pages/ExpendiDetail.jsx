@@ -70,23 +70,31 @@ const ExpendiDetail = () => {
                 })()}
               </label>
               <input
-                type={
-                  item === "date"
-                    ? "date"
-                    : item === "amount"
-                    ? "number"
-                    : "text"
-                }
+                type={(() => {
+                  switch (item) {
+                    case "date":
+                      return "date";
+                    case "amount":
+                      return "number";
+                    default:
+                      return "text";
+                  }
+                })()}
                 name={item}
-                ref={
-                  item === "date"
-                    ? dateRef
-                    : item === "amount"
-                    ? amountRef
-                    : item === "content"
-                    ? contentRef
-                    : categoryRef
-                }
+                ref={(() => {
+                  switch (item) {
+                    case "date":
+                      return dateRef;
+                    case "amount":
+                      return amountRef;
+                    case "content":
+                      return contentRef;
+                    case "category":
+                      return categoryRef;
+                    default:
+                      return "";
+                  }
+                })()}
                 defaultValue={value}
                 autoComplete="off"
               />

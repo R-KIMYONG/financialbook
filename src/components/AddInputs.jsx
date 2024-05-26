@@ -42,7 +42,6 @@ const AddInputs = ({ item, value, setInputs }) => {
         })()}
       </S.Formlabel>
       <S.Forminput
-        // type={item === "amount" ? "number" : "text"}
         type={(() => {
           switch (item) {
             case "ampunt":
