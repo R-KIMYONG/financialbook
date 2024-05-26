@@ -13,6 +13,7 @@ export default defineConfig({
       { find: "@pages", replacement: "/src/pages" },
       { find: "@StyledComponents", replacement: "/src/StyledComponents" },
       { find: "@FamilyContext", replacement: "/src/FamilyContext" },
+      { find: "@assets", replacement: "/src/assets" },
     ],
   },
 });
