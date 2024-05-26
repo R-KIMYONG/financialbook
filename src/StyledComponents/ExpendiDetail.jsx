@@ -35,6 +35,7 @@ export const DetailDiv = styled.div`
   & > .UDB-btnbox {
     display: flex;
     gap: 20px;
+    
   }
 
   & button {
@@ -46,5 +47,9 @@ export const DetailDiv = styled.div`
     font-size: 20px;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+    box-shadow: 0px 0px 10px #ccc;
+  }
   }
 `;
