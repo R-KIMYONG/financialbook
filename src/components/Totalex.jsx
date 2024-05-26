@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import * as S from "../StyledComponents/Totalamount.jsx";
-import TotalexLi from "./TotalexLi.jsx";
-import TotalGraph from "./TotalGraph.jsx";
+import * as S from "@StyledComponents/Totalamount.jsx";
+import TotalexLi from "@components/TotalexLi.jsx";
+import TotalGraph from "@components/TotalGraph.jsx";
 const Totalex = ({ expenses, activeIndex }) => {
   const [totalAmount, setTotalAmount] = useState(0);
   const categoryItem = ["여행", "미용", "식비", "도서", "기타"];

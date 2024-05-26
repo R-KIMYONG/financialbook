@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import * as S from "../StyledComponents/Formstyle.jsx";
+import * as S from "@StyledComponents/Formstyle.jsx";
 import { v4 as uuidv4 } from "uuid";
-import AddInputs from "./AddInputs.jsx";
-import Monthlist from "./Monthlist.jsx";
+import AddInputs from "@components/AddInputs.jsx";
+import Monthlist from "@components/Monthlist.jsx";
 
 const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
   const getDate = new Date();

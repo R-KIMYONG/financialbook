@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { nanoid } from "nanoid";
-import * as S from "../StyledComponents/ExpendiDetail.jsx";
+import * as S from "@StyledComponents/ExpendiDetail.jsx";
 
 const ExpendiDetail = ({ expenses, setExpenses }) => {
   const navigate = useNavigate();

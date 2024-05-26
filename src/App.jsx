@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Addform from "./components/Addform";
-import { GlobalStyle } from "./StyledComponents/GlobalStyle.jsx";
+import Addform from "@components/Addform";
+import { GlobalStyle } from "@StyledComponents/GlobalStyle.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ExpendiDetail from "./pages/ExpendiDetail";
-import fakeData from "./fakeData.json";
+import ExpendiDetail from "@pages/ExpendiDetail";
+import fakeData from "@/fakeData.json";
 function App() {
   //각항목을 담은 state
   const [expenses, setExpenses] = useState(() => {

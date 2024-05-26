@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../StyledComponents/Totalamount";
+import * as S from "@StyledComponents/Totalamount";
 
 const TotalexLi = ({
   category,

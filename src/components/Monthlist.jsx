@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import * as S from "../StyledComponents/Monthstyle.jsx";
-import Totalex from "./Totalex.jsx";
-import ExpenditureItem from "./ExpenditureItem.jsx";
+import * as S from "@StyledComponents/Monthstyle.jsx";
+import Totalex from "@components/Totalex.jsx";
+import ExpenditureItem from "@components/ExpenditureItem.jsx";
 const Monthlist = ({ expenses, setInputs, activeIndex, setActiveIndex }) => {
   const months = Array.from({ length: 12 }, (_, index) => index + 1);
 

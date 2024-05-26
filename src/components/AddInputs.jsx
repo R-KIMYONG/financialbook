@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../StyledComponents/Formstyle.jsx";
+import * as S from "@StyledComponents/Formstyle.jsx";
 const AddInputs = ({ item, value, setInputs }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;

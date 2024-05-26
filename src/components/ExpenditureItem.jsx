@@ -1,4 +1,4 @@
-import * as S from "../StyledComponents/Expenditurestyle.jsx";
+import * as S from "@StyledComponents/Expenditurestyle.jsx";
 import { useNavigate } from "react-router-dom";
 const ExpenditureItem = ({ expenses, activeIndex }) => {
   const navigate = useNavigate();
