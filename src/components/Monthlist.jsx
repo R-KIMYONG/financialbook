@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useCallback } from "react";
 import * as S from "@StyledComponents/Monthstyle.jsx";
 import Totalex from "@components/Totalex.jsx";
 import ExpenditureItem from "@components/ExpenditureItem.jsx";
-const Monthlist = ({ expenses, setInputs, activeIndex, setActiveIndex }) => {
+import { FamilyContext } from "@FamilyContext/FamilyContext";
+
+const Monthlist = ({ setInputs }) => {
+  const { activeIndex, setActiveIndex } = useContext(FamilyContext);
   const months = Array.from({ length: 12 }, (_, index) => index + 1);
 
-  const handleClick = (index) => {
-    const clickedMonth = `2024-${String(index + 1).padStart(2, "0")}-01`;
-    setInputs((prev) => ({
-      ...prev,
-      date: clickedMonth,
-    }));
+  const handleClick = useCallback(
+    (index) => {
+      const clickedMonth = `2024-${String(index + 1).padStart(2, "0")}-01`;
+      setInputs((prev) => ({
+        ...prev,
+        date: clickedMonth,
+      }));
 
-    setActiveIndex(index);
-  };
+      setActiveIndex(index);
+    },
+    [setInputs, setActiveIndex]
+  );
 
   useEffect(() => {
     localStorage.setItem("monthIndex", JSON.stringify(activeIndex));
@@ -34,10 +40,10 @@ const Monthlist = ({ expenses, setInputs, activeIndex, setActiveIndex }) => {
           </S.MonthLi>
         ))}
       </S.MonthUl>
-      <Totalex expenses={expenses} activeIndex={activeIndex} />
-      <ExpenditureItem expenses={expenses} activeIndex={activeIndex} />
+      <Totalex />
+      <ExpenditureItem />
     </div>
   );
 };
 
-export default Monthlist;
+export default React.memo(Monthlist);

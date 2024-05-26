@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import * as S from "@StyledComponents/Formstyle.jsx";
 import { v4 as uuidv4 } from "uuid";
 import AddInputs from "@components/AddInputs.jsx";
 import Monthlist from "@components/Monthlist.jsx";
+import { FamilyContext } from "@FamilyContext/FamilyContext";
 
-const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
+const Addform = () => {
+  const { setExpenses, activeIndex } = useContext(FamilyContext);
   const getDate = new Date();
   const getYear = getDate.getFullYear();
   const [inputs, setInputs] = useState({
@@ -16,7 +18,7 @@ const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
   });
   const [error, setError] = useState({});
 
-  const handleAddForm = async (e) => {
+  const handleAddForm = useCallback((e) => {
     e.preventDefault();
 
     if (checkInput()) {
@@ -33,7 +35,7 @@ const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
 
     setExpenses((prev) => [...prev, newExpenses]);
     resetAddform();
-  };
+  });
 
   const checkInput = () => {
     const newError = {};
@@ -84,21 +86,14 @@ const Addform = ({ setExpenses, expenses, activeIndex, setActiveIndex }) => {
                 item={item}
                 value={value}
                 setInputs={setInputs}
-                activeIndex={activeIndex}
-                setActiveIndex={setActiveIndex}
               />
             ))}
           <S.FormSaveBtn>저장</S.FormSaveBtn>
         </S.Fromsubmit>
-        <Monthlist
-          expenses={expenses}
-          setInputs={setInputs}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-        />
+        <Monthlist setInputs={setInputs} />
       </div>
     </>
   );
 };
 
-export default Addform;
+export default React.memo(Addform);

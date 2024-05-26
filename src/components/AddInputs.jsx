@@ -1,7 +1,8 @@
 import React from "react";
 import * as S from "@StyledComponents/Formstyle.jsx";
+import { useCallback } from "react";
 const AddInputs = ({ item, value, setInputs }) => {
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
 
     setInputs((prevInputs) => {
@@ -20,37 +21,57 @@ const AddInputs = ({ item, value, setInputs }) => {
         [name]: value,
       };
     });
-  };
+  });
 
   return (
     <S.Formdiv>
       <S.Formlabel htmlFor="date">
-        {item === "date"
-          ? "날짜"
-          : item === "category"
-          ? "항목"
-          : item === "amount"
-          ? "금액"
-          : "내용"}
+        {(() => {
+          switch (item) {
+            case "date":
+              return "날짜";
+            case "category":
+              return "항목";
+            case "amount":
+              return "금액";
+            case "content":
+              return "내용";
+            default:
+              return "";
+          }
+        })()}
       </S.Formlabel>
       <S.Forminput
-        type={item === "amount" ? "number" : "text"}
+        // type={item === "amount" ? "number" : "text"}
+        type={(() => {
+          switch (item) {
+            case "ampunt":
+              return "number";
+            default:
+              return "text";
+          }
+        })()}
         value={value}
         name={item}
         autoComplete="off"
-        placeholder={
-          item === "category"
-            ? "지출 항목"
-            : item === "amount"
-            ? "지출 금액"
-            : item === "date"
-            ? "YYYY-MM-DD"
-            : ""
-        }
+        placeholder={(() => {
+          switch (item) {
+            case "category":
+              return "지출항목";
+            case "amount":
+              return "지출 금액";
+            case "date":
+              return "YYYY-MM-DD";
+            case "content":
+              return "지출 내용";
+            default:
+              return "";
+          }
+        })()}
         onChange={handleChange}
       />
     </S.Formdiv>
   );
 };
 
-export default AddInputs;
+export default React.memo(AddInputs);

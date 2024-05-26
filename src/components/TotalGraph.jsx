@@ -19,4 +19,4 @@ const TotalGraph = ({ categoryItem, getCategoryTotal, totalAmount }) => {
   );
 };
 
-export default TotalGraph;
+export default React.memo(TotalGraph);

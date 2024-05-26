@@ -28,4 +28,4 @@ const TotalexLi = ({
   );
 };
 
-export default TotalexLi;
+export default React.memo(TotalexLi);

@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as S from "@StyledComponents/Totalamount.jsx";
 import TotalexLi from "@components/TotalexLi.jsx";
 import TotalGraph from "@components/TotalGraph.jsx";
-const Totalex = ({ expenses, activeIndex }) => {
+import { FamilyContext } from "@FamilyContext/FamilyContext";
+const Totalex = () => {
+  const { expenses, activeIndex } = useContext(FamilyContext);
   const [totalAmount, setTotalAmount] = useState(0);
   const categoryItem = ["여행", "미용", "식비", "도서", "기타"];
+
   useEffect(() => {
     let total = 0;
     expenses
-      .filter((item) => Number(item.date.substring(5, 7)) === activeIndex + 1)
+      .filter(
+        (item) =>
+          item &&
+          item.date &&
+          Number(item.date.substring(5, 7)) === activeIndex + 1
+      )
       .forEach((item) => {
         total += Number(item.amount);
       });
@@ -20,7 +28,12 @@ const Totalex = ({ expenses, activeIndex }) => {
     let otherAmount = 0;
 
     expenses
-      .filter((item) => Number(item.date.substring(5, 7)) === activeIndex + 1)
+      .filter(
+        (item) =>
+          item &&
+          item.date &&
+          Number(item.date.substring(5, 7)) === activeIndex + 1
+      )
       .forEach((item) => {
         if (item.category === category) {
           total += Number(item.amount);
@@ -58,4 +71,4 @@ const Totalex = ({ expenses, activeIndex }) => {
   );
 };
 
-export default Totalex;
+export default React.memo(Totalex);

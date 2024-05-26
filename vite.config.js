@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { FamilyContext } from "./src/FamilyContext/FamilyContext";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
       { find: "@headers", replacement: "/src/components/headers" },
       { find: "@pages", replacement: "/src/pages" },
       { find: "@StyledComponents", replacement: "/src/StyledComponents" },
+      { find: "@FamilyContext", replacement: "/src/FamilyContext" },
     ],
   },
 });

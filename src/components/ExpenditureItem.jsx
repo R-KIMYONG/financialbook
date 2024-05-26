@@ -1,26 +1,31 @@
 import * as S from "@StyledComponents/Expenditurestyle.jsx";
 import { useNavigate } from "react-router-dom";
-const ExpenditureItem = ({ expenses, activeIndex }) => {
-  const navigate = useNavigate();
-  const filterMonthlist = expenses
-    .sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+import { FamilyContext } from "@FamilyContext/FamilyContext";
+import { useContext,useMemo } from "react";
+const ExpenditureItem = () => {
+  const { expenses, activeIndex } = useContext(FamilyContext);
 
-      if (dateA - dateB !== 0) {
-        return dateB - dateA;
-      } else {
-        return b.amount - a.amount;
-      }
-    })
-    .filter((item) => {
-      const itemMonth = (new Date(item.date).getMonth() + 1)
-        .toString()
-        .padStart(2, "0");
-      const activeMonth = (activeIndex + 1).toString().padStart(2, "0");
-      return itemMonth === activeMonth;
-    });
-  // new Date(item.date).getMonth() + 1 === activeIndex + 1
+  const navigate = useNavigate();
+  const filterMonthlist = useMemo(() => {
+    return expenses
+      .sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+
+        if (dateA - dateB !== 0) {
+          return dateB - dateA;
+        } else {
+          return b.amount - a.amount;
+        }
+      })
+      .filter((item) => {
+        const itemMonth = (new Date(item.date).getMonth() + 1)
+          .toString()
+          .padStart(2, "0");
+        const activeMonth = (activeIndex + 1).toString().padStart(2, "0");
+        return itemMonth === activeMonth;
+      });
+  }, [expenses, activeIndex]);
   return (
     <S.ExpenditureUl>
       {filterMonthlist.length > 0 ? (
