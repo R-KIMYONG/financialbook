@@ -5,7 +5,7 @@ import { GlobalStyle } from "@StyledComponents/GlobalStyle.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ExpendiDetail from "@pages/ExpendiDetail";
 import fakeData from "@/fakeData.json";
-import { FamilyContext } from "./FamilyContext/FamilyContext";
+import { FamilyContext } from "./store/FamilyContext";
 
 function App() {
   //각항목을 담은 state
@@ -43,12 +43,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <FamilyContext.Provider value={contextValue}>
-          <Routes>
-            <Route path="/" element={<Addform />} />
-            <Route path="/detail/:id" element={<ExpendiDetail />} />
-          </Routes>
-        </FamilyContext.Provider>
+        <Routes>
+          <Route path="/" element={<Addform />} />
+          <Route path="/detail/:id" element={<ExpendiDetail />} />
+        </Routes>
       </BrowserRouter>
       <GlobalStyle />
     </>

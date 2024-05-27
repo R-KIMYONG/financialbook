@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { FamilyContext } from "./src/FamilyContext/FamilyContext";
+import { FamilyContext } from "./src/store/FamilyContext";
 
 // https://vitejs.dev/config/
 export default defineConfig({
