@@ -9,7 +9,10 @@ const ExpendiDetail = () => {
   const categoryList = useSelector((state) => state.categoryList);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { dateRef, categoryRef, contentRef, amountRef } = useRef();
+  const dateRef =useRef()
+  const categoryRef =useRef()
+  const contentRef =useRef()
+  const amountRef =useRef()
   const expense = expenses.find((item) => item.id === id);
   const dispatch = useDispatch();
   const handleUpdateBtn = () => {
@@ -23,7 +26,6 @@ const ExpendiDetail = () => {
       amount: amountRef.current.value || expense.amount,
       content: contentRef.current.value || expense.content,
     };
-    console.log(updateExpense);
     dispatch(handleUpdate({ id, updatedExpense: updateExpense }));
     navigate("/");
   };
