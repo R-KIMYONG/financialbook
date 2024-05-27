@@ -3,20 +3,21 @@ import * as S from "@StyledComponents/Formstyle.jsx";
 import { v4 as uuidv4 } from "uuid";
 import AddInputs from "@components/AddInputs.jsx";
 import Monthlist from "@components/Monthlist.jsx";
-import { FamilyContext } from "@FamilyContext/FamilyContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setExpenses } from "../store/config/configStore";
 
 const Addform = () => {
-  const { setExpenses, activeIndex } = useContext(FamilyContext);
-  const getDate = new Date();
-  const getYear = getDate.getFullYear();
+  const activeIndex = useSelector((state) => state.activeIndex);
   const [inputs, setInputs] = useState({
     id: "",
-    date: `${getYear}-${String(Number(activeIndex) + 1).padStart(2, "0")}-01`,
+    date: `2024-${String(Number(activeIndex) + 1).padStart(2, "0")}-01`,
     category: "",
     amount: "",
     content: "",
   });
   const [error, setError] = useState({});
+
+  const dispatch = useDispatch();
 
   const handleAddForm = useCallback((e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const Addform = () => {
       content: inputs.content,
     };
 
-    setExpenses((prev) => [...prev, newExpenses]);
+    dispatch(setExpenses(newExpenses));
     resetAddform();
   });
 

@@ -2,49 +2,32 @@ import React, { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { nanoid } from "nanoid";
 import * as S from "@StyledComponents/ExpendiDetail.jsx";
-import { FamilyContext } from "@FamilyContext/FamilyContext";
-import { useContext } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { handleUpdate, handleDelete } from "../store/config/configStore";
 const ExpendiDetail = () => {
-  const { expenses, setExpenses } = useContext(FamilyContext);
+  const expenses = useSelector((state) => state.expenses);
+  const categoryList = useSelector((state) => state.categoryList);
   const navigate = useNavigate();
   const { id } = useParams();
-  const dateRef = useRef();
-  const categoryRef = useRef();
-  const amountRef = useRef();
-  const contentRef = useRef();
+  const { dateRef, categoryRef, contentRef, amountRef } = useRef();
   const expense = expenses.find((item) => item.id === id);
-
-  const handleUpdate = () => {
+  const dispatch = useDispatch();
+  const handleUpdateBtn = () => {
     if (isNaN(amountRef.current.value)) {
       alert("금액은 숫자으로만 수정가능합니다.");
       return;
     }
-    const updateExpense = expenses.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            date: dateRef.current.value || item.date,
-            category: categoryRef.current.value || item.category,
-            amount: amountRef.current.value || item.amount,
-            content: contentRef.current.value || item.content,
-          }
-        : item
-    );
-
-    setExpenses(updateExpense);
+    const updateExpense = {
+      date: dateRef.current.value || expense.date,
+      category: categoryRef.current.value || expense.category,
+      amount: amountRef.current.value || expense.amount,
+      content: contentRef.current.value || expense.content,
+    };
+    console.log(updateExpense);
+    dispatch(handleUpdate({ id, updatedExpense: updateExpense }));
     navigate("/");
   };
 
-  const handleDelete = () => {
-    if (confirm("정말로 삭제하시겠습니까?")) {
-      const updatedExpenses = expenses.filter((item) => item.id !== id);
-      setExpenses(updatedExpenses);
-      navigate("/");
-    } else {
-      return;
-    }
-  };
   return (
     <S.DetailDiv>
       <>
@@ -53,33 +36,9 @@ const ExpendiDetail = () => {
           .filter(([item]) => item !== "id")
           .map(([item, value]) => (
             <div className="detail-input" key={nanoid()}>
-              <label htmlFor={item}>
-                {(() => {
-                  switch (item) {
-                    case "date":
-                      return "날짜";
-                    case "category":
-                      return "항목";
-                    case "amount":
-                      return "금액";
-                    case "content":
-                      return "내용";
-                    default:
-                      return "";
-                  }
-                })()}
-              </label>
+              <label htmlFor={item}>{categoryList[item].label}</label>
               <input
-                type={(() => {
-                  switch (item) {
-                    case "date":
-                      return "date";
-                    case "amount":
-                      return "number";
-                    default:
-                      return "text";
-                  }
-                })()}
+                type={categoryList[item].type}
                 name={item}
                 ref={(() => {
                   switch (item) {
@@ -103,14 +62,15 @@ const ExpendiDetail = () => {
         <div className="UDB-btnbox">
           <button
             onClick={() => {
-              handleUpdate();
+              handleUpdateBtn();
             }}
           >
             수정
           </button>
           <button
             onClick={() => {
-              handleDelete();
+              dispatch(handleDelete(id));
+              navigate("/");
             }}
           >
             삭제

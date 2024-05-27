@@ -1,7 +1,9 @@
 import React from "react";
 import * as S from "@StyledComponents/Formstyle.jsx";
 import { useCallback } from "react";
+import { useSelector } from "react-redux";
 const AddInputs = ({ item, value, setInputs }) => {
+  const categoryList = useSelector((state) => state.categoryList);
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
 
@@ -26,47 +28,14 @@ const AddInputs = ({ item, value, setInputs }) => {
   return (
     <S.Formdiv>
       <S.Formlabel htmlFor="date">
-        {(() => {
-          switch (item) {
-            case "date":
-              return "날짜";
-            case "category":
-              return "항목";
-            case "amount":
-              return "금액";
-            case "content":
-              return "내용";
-            default:
-              return "";
-          }
-        })()}
+        {categoryList[item].label}
       </S.Formlabel>
       <S.Forminput
-        type={(() => {
-          switch (item) {
-            case "ampunt":
-              return "number";
-            default:
-              return "text";
-          }
-        })()}
+        type={categoryList[item].type}
         value={value}
         name={item}
         autoComplete="off"
-        placeholder={(() => {
-          switch (item) {
-            case "category":
-              return "지출항목";
-            case "amount":
-              return "지출 금액";
-            case "date":
-              return "YYYY-MM-DD";
-            case "content":
-              return "지출 내용";
-            default:
-              return "";
-          }
-        })()}
+        placeholder={categoryList[item].placeholder}
         onChange={handleChange}
       />
     </S.Formdiv>

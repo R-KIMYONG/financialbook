@@ -2,9 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import * as S from "@StyledComponents/Totalamount.jsx";
 import TotalexLi from "@components/TotalexLi.jsx";
 import TotalGraph from "@components/TotalGraph.jsx";
-import { FamilyContext } from "@FamilyContext/FamilyContext";
+import { useSelector } from "react-redux";
+
 const Totalex = () => {
-  const { expenses, activeIndex } = useContext(FamilyContext);
+  const activeIndex= useSelector(state=> state.activeIndex)
+  const expenses  = useSelector(state => state.expenses)
   const [totalAmount, setTotalAmount] = useState(0);
   const categoryItem = ["여행", "미용", "식비", "도서", "기타"];
 
